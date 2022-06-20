@@ -1,10 +1,24 @@
-Welp!
+# README
 
-Yelp clone
-Feature 1: Business Page
-Feature 2: Search/Filters
-Feature 3: Reviews/Ratings - CRUD
-Feature 4: Map - Google Maps
-Bonus: Mark reviews funny, cool, useful etc.
-Bonus: Profile
-Bonus: Friends
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
