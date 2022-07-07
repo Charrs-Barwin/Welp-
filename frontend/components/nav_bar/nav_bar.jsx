@@ -20,22 +20,25 @@ class NavBar extends React.Component {
     const display = currentUser ? (
       <div>
         <p>Hello, {currentUser.name}</p>
-        < Link to="/" onClick={this.props.logout}> Logout! </Link>
+        <Link className="btn" to="/" onClick={this.props.logout}><button> Logout! </button></Link>
+        <br/>
+        <Link className="btn" to="/create">Add New Business</Link>
       </div>
     ) : (
       <div>
-        <Link className="btn" to="/signup">Sign Up</Link>
+        <Link className="btn" to="/signup"><button>Sign Up</button></Link>
         <br/>
-        <Link className="btn" to="/login">Log In</Link>
+        <Link className="btn" to="/login"><button>Log In</button></Link>
       </div>
     );
     
     return (
       <header className="nav-bar">
-        <h1 className="logo">Welp (from nav_bar.jsx)</h1>
+        <h1 className="logo">Welp</h1>
         <div>
           {display}
         </div>
+        <Link className="btn" to="/index">index link</Link>
       </header>
     );
   }

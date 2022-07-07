@@ -1,0 +1,16 @@
+=> [[32m#<User:0x00007fd6207db038[0m
+  id: [1;34m15[0m,
+  name: [31m[1;31m"[0m[31mmike1[1;31m"[0m[31m[0m,
+  email: [31m[1;31m"[0m[31mmike1@email.com[1;31m"[0m[31m[0m,
+  created_at: [1;34;4mWed[0m, [1;34m29[0m [1;34;4mJun[0m [1;34m2022[0m [1;34m22[0m:[1;34m47[0m:[1;34m29[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+  updated_at: [1;34;4mWed[0m, [1;34m29[0m [1;34;4mJun[0m [1;34m2022[0m [1;34m22[0m:[1;34m47[0m:[1;34m29[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+  password_digest: [31m[1;31m"[0m[31m$2a$12$ItWZCeh1RcXxNtaOVbYyG.6KkKUZaLULWfBkOZDEUGrCf/abwsefa[1;31m"[0m[31m[0m,
+  session_token: [31m[1;31m"[0m[31mNS2a/7NRZL61AZNIFBi+Yg==[1;31m"[0m[31m[0m[32m>[0m,
+ [32m#<User:0x00007fd6207d7960[0m
+  id: [1;34m16[0m,
+  name: [31m[1;31m"[0m[31mmike2[1;31m"[0m[31m[0m,
+  email: [31m[1;31m"[0m[31mmike2@email.com[1;31m"[0m[31m[0m,
+  created_at: [1;34;4mWed[0m, [1;34m29[0m [1;34;4mJun[0m [1;34m2022[0m [1;34m22[0m:[1;34m47[0m:[1;34m29[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+  updated_at: [1;34;4mWed[0m, [1;34m29[0m [1;34;4mJun[0m [1;34m2022[0m [1;34m22[0m:[1;34m47[0m:[1;34m29[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+  password_digest: [31m[1;31m"[0m[31m$2a$12$0GrgOnU2g9Y/EY7.1DF1OOCGGkmLwViujd6HeqsNDQg2NPBz2l2tK[1;31m"[0m[31m[0m,
+  session_token: [31m[1;31m"[0m[31mvTBG4lJWuKCJtJpOroqotQ==[1;31m"[0m[31m[0m[32m>[0m]

@@ -12,5 +12,4 @@ const mapDTP = dispatch => ({
   logout: () => dispatch(logout()),
 });
 
-// export default connect(mapSTP,mapDTP)(NavBar);
 export default withRouter(connect(mapSTP,mapDTP)(NavBar));

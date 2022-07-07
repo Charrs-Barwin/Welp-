@@ -5,3 +5,40 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+Business.destroy_all
+User.destroy_all # can exist on its own
+# ActiveRecord::Base.connection.execute('ALTER TABLE table_name AUTO_INCREMENT = 1')
+# ActiveRecord::Base.connection.reset_pk_sequence!('users')
+# ActiveRecord::Base.connection.reset_pk_sequence!('businesses')
+ActiveRecord::Base.connection.tables.each do |t|
+    ActiveRecord::Base.connection.reset_pk_sequence!(t)
+end
+
+# USERS
+mike1 = User.create!(
+    name: "mike1", 
+    email: "mike1@email.com", 
+    password: "123456"
+)
+
+mike2 = User.create!(
+    name: "mike2", 
+    email: "mike2@email.com", 
+    password: "123456"
+)
+
+#BUSINESSES
+bigburger = Business.create!(
+    name: "Big Burger",
+    location: "12 street",
+    phone: 5555555,
+    website: "bigburger.com"
+)
+
+littleburger = Business.create!(
+    name: "Little Burger",
+    location: "2 street",
+    phone: 5555556,
+    website: "littleburger.com"
+)
