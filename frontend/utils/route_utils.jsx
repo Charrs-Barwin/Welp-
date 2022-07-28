@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect, Route, withRouter } from 'react-router-dom';
-// import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 
 const mapSTP = state => ({
     loggedIn: Boolean(state.session.currentUser)
@@ -19,5 +18,5 @@ const Protected = ({ loggedIn, path, component: Component, exact }) => (
     />
 );
 
-export const AuthRoute = withRouter(connect(mapSTP)(Auth));
-export const ProtectedRoute = withRouter(connect(mapSTP)(Protected));
+export const AuthRoute = connect(mapSTP)(Auth);
+export const ProtectedRoute = connect(mapSTP)(Protected);

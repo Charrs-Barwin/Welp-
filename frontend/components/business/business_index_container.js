@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import BusinessIndex from './BusinessIndex'
 import { getBusinesses, getBusiness } from '../../actions/business'
 
@@ -14,4 +13,4 @@ const mapDTP = dispatch => ({
   getBusiness: bsnId => dispatch(getBusiness(bsnId))
 });
 
-export default withRouter(connect(mapSTP, mapDTP)(BusinessIndex));
+export default connect(mapSTP, mapDTP)(BusinessIndex);

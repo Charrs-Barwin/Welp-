@@ -6,9 +6,9 @@ import {
     deleteBusiness
 } from '../utils/business';
 
-export const RECEIVE_ALL_BUSINESSES = 'RECEIVE_ALL_POSTS';
-export const RECEIVE_BUSINESS = 'RECEIVE_POST';
-export const REMOVE_BUSINESS = 'REMOVE_POST';
+export const RECEIVE_ALL_BUSINESSES = 'RECEIVE_ALL_BUSINESSES';
+export const RECEIVE_BUSINESS = 'RECEIVE_BUSINESS';
+export const REMOVE_BUSINESS = 'REMOVE_BUSINESS';
 
 const receiveAllBusinesses = businesses => ({
   type: RECEIVE_ALL_BUSINESSES,

@@ -5,7 +5,6 @@ import AddBusiness from './new_business_container';
 class BusinessIndex extends React.Component {
   componentDidMount() {
     this.props.getBusinesses();
-    // debugger
   }
 
   render() {

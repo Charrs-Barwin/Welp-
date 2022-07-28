@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+ body {
+    /* background: radial-gradient(circle at center,rgb(0, 0, 255) 0%,rgb(255, 0, 0) 150%); */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.businessItem {
+    display:flex;
+    flex-direction: column;
+}

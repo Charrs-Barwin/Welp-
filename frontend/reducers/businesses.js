@@ -7,10 +7,10 @@ import {
 export default (state={},action) => {
     Object.freeze(state);
     let ns = Object.assign({},state)
-    switch (action.key) {
+    switch (action.type) {
         case RECEIVE_ALL_BUSINESSES:
             return Object.assign(ns,action.businesses)
-            case RECEIVE_BUSINESS:
+        case RECEIVE_BUSINESS:
             return Object.assign(ns,{ [action.bsn.id]: action.bsn })
         case REMOVE_BUSINESS:
             delete ns[action.bsnId]

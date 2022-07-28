@@ -1,16 +1,10 @@
 class Api::BusinessesController < ApplicationController
     
-  # def new
-  #   @business = Business.new
-  #   render :new
-  # end
-
   def create
     @business = Business.new(business_params)
     @business.owner_id = current_user.id
     if @business.save
-        render :show
-    #   redirect_to business_url(@business)
+      render :show
     else
       render json: @business.errors.full_messages, status: 422
     end
@@ -26,11 +20,6 @@ class Api::BusinessesController < ApplicationController
   end
 
   def index
-    # @businesses = if params[:user_id]
-    #                 Business.where(owner_id: params[:user_id])
-    #             else
-    #                 Business.all
-    #             end
     @businesses = Business.all
     render :index
   end
