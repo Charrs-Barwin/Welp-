@@ -1,5 +1,6 @@
 import React from 'react';
-import BusinessIndexItem from './business_index_item';
+// import BusinessIndexItem from './business_index_item';
+import { Link } from 'react-router-dom';
 import AddBusiness from './new_business_container';
 
 class BusinessIndex extends React.Component {
@@ -8,19 +9,15 @@ class BusinessIndex extends React.Component {
   }
 
   render() {
-    const { businesses, getBusiness } = this.props;
-
     return (
       <div>
-        <h1>INDEX PAGE </h1>
         <ul>
           {
-            businesses.map(bsn => (
-              <BusinessIndexItem
-                bsn={bsn}
-                getBusiness={getBusiness}
-                key={bsn.id}
-              />
+            this.props.businesses.map(bsn => (
+              <div key={bsn.id}>
+                <Link to={`/businesses/${bsn.id}`} >{bsn.name}</Link>
+                <br/>
+              </div>
             ))
           }
         </ul>

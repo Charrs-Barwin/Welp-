@@ -19,7 +19,8 @@ export default () => (
       <NavBarContainer/>
       <h4></h4>
       <Switch>
-        <ProtectedRoute path="/edit" component={EditBusinessContainer} />
+        <ProtectedRoute path="/businesses/:id/edit" component={EditBusinessContainer} />
+        <Route path="/businesses/:id" component={ShowBusinessContainer} />
         <ProtectedRoute path="/create" component={NewBusinesContainer} />
         <AuthRoute path="/signup" component={SignupContainer} />
         <AuthRoute path="/login" component={LoginContainer} />

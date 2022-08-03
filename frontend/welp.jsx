@@ -4,7 +4,7 @@ import configureStore from "./store/store";
 import Root from "./components/root";
 
 import {postUser,postSession,deleteSession} from "./utils/session";
-import {createNewUser,login,logout} from "./actions/session";
+// import {createNewUser,login,logout} from "./actions/session";
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");

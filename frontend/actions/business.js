@@ -32,10 +32,10 @@ export const getBusiness = bsnId => dispatch => fetchBusiness(bsnId)
     .then(bsn => dispatch(receiveBusiness(bsn)))
 
 export const addBusiness = bsn => dispatch => createBusiness(bsn)
-    .then(bsn => dispatch(receiveBusiness(bsn)))
+    .then(_bsn => dispatch(receiveBusiness(_bsn)))
 
 export const editBusiness = bsn => dispatch => updateBusiness(bsn)
-    .then(bsn => dispatch(receiveBusiness(bsn)))
+    .then(_bsn => dispatch(receiveBusiness(_bsn)))
 
 export const eraseBusiness = bsnId => dispatch => deleteBusiness(bsnId)
     .then(() => dispatch(removeBusiness(bsnId)))

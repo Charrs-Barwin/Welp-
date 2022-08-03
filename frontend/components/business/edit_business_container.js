@@ -1,6 +1,6 @@
 import {
     // getBusinesses,
-    // getBusiness,
+    getBusiness,
     // addBusiness,
     editBusiness,
     // eraseBusiness
@@ -8,13 +8,16 @@ import {
 import {connect} from 'react-redux';
 import BusinessForm from './BusinessForm';
 
-const mapSTP = (state) => ({
+const mapSTP = (state,ownProps) => ({
+    business: state.entities.businesses[ownProps.match.params.id],
     errors: Object.values(state.errors),
-    formType: "Edit"
+    formType: "Edit",
+    currentUser: state.session.currentUser.id,
 })
 
-const mapDTP = dispatch => ({
-    processForm: bsn => dispatch(editBusiness(bsn))
+const mapDTP = (dispatch,ownProps) => ({
+    processForm: bsn => dispatch(editBusiness(bsn)),
+    getBusiness: () => dispatch(getBusiness(ownProps.match.params.id))
 })
 
 export default connect(mapSTP,mapDTP)(BusinessForm);

@@ -4,13 +4,20 @@ import React from "react";
 class BusinessForm extends React.Component {
     constructor(props){
         super(props)
-        this.state = {
+        this.state = {// this.props.formtype === 'Edit' ? this.props.business : {
             name:'',
             location:'',
             phone:'',
             website:''
         }
         this.handleSubmit = this.handleSubmit.bind(this)
+    }
+    
+    componentDidMount() {
+        if (this.props.formType === 'Edit'){
+          this.props.getBusiness()
+            .then(()=>this.setState(this.props.business))
+        }
     }
 
     handleInput(type) {
@@ -21,7 +28,14 @@ class BusinessForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        // debugger
         this.props.processForm(this.state)
+        .then( (action) => {
+            this.props.history.push(`/businesses/${action.bsn.id}`)
+            // this.props.errors.body ? this.setState({errors: true}) : this.props.history.push('/') 
+        })
+        // .then()
+        // this.props.history.push('/')
     }
 
     render() {

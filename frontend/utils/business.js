@@ -14,13 +14,14 @@ export const createBusiness = business => (
   })
 );
 
-export const updateBusiness = business => (
-  $.ajax({
-    url: '/api/businesses/'+bsn.id,
+export const updateBusiness = business => {
+  console.log(business);
+  return $.ajax({
+    url: '/api/businesses/'+business.id,
     method: 'patch',
     data: { business }
   })
-);
+};
 
 export const deleteBusiness = bsnId => (
   $.ajax({

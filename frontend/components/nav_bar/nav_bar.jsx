@@ -33,7 +33,9 @@ class NavBar extends React.Component {
     
     return (
       <header className="nav-bar">
+        <Link to='/'>
         <h1 className="logo">Welp</h1>
+        </Link>
         <div>
           {display}
         </div>

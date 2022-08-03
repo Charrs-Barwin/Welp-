@@ -1,13 +1,15 @@
 import { connect } from 'react-redux';
-import {getBusiness,editBusiness,eraseBusiness} from '../../actions/business'
+import {getBusiness,eraseBusiness} from '../../actions/business'
 import BusinessShow from './BusinessShow';
 
 const mapSTP = (state, ownProps) => ({
-  business: state.businesses[ownProps.match.params.bsnId]
+    business: state.entities.businesses[ownProps.match.params.id],
+    currentUser: state.session.currentUser.id
 });
 
-const mapDTP = dispatch => ({
-    getBusiness: bsnId => dispatch(getBusiness(bsnId))
+const mapDTP = (dispatch, ownProps) => ({
+    getBusiness: () => dispatch(getBusiness(ownProps.match.params.id)),
+    eraseBusiness: () => dispatch(eraseBusiness(ownProps.match.params.id))
 });
 
 export default connect(mapSTP, mapDTP)(BusinessShow);
