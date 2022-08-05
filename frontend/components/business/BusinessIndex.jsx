@@ -10,19 +10,16 @@ class BusinessIndex extends React.Component {
 
   render() {
     return (
-      <div>
-        <ul>
-          {
-            this.props.businesses.map(bsn => (
-              <div key={bsn.id}>
-                <Link to={`/businesses/${bsn.id}`} >{bsn.name}</Link>
-                <br/>
-              </div>
-            ))
-          }
-        </ul>
-        <AddBusiness/>
-      </div>
+      <ul>
+        {
+          this.props.businesses.map(bsn => (
+            <div key={bsn.id}>
+              <Link to={`/businesses/${bsn.id}`} >{bsn.name}</Link>
+              <br/>
+            </div>
+          ))
+        }
+      </ul>
     );
   }
 }

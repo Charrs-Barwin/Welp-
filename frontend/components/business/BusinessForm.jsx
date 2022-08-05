@@ -1,5 +1,5 @@
 import React from "react";
-// import { Redirect, Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 class BusinessForm extends React.Component {
     constructor(props){
@@ -27,7 +27,7 @@ class BusinessForm extends React.Component {
     }
 
     handleSubmit(e) {
-        e.preventDefault();
+        // e.preventDefault();
         // debugger
         this.props.processForm(this.state)
         .then( (action) => {
@@ -64,6 +64,9 @@ class BusinessForm extends React.Component {
                     {errors.forEach(err => <p>{err}<br/></p>)}
                     <br/>
                     <button type="submit">{formType}</button>
+                    <Link to={this.props.formType === 'Edit' ? `/businesses/${this.props.business.id}` : '/'} >
+                        <button>Cancel</button>
+                    </Link>
                 </form>
             </div>
         )
