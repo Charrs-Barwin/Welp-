@@ -32,7 +32,8 @@ class Api::BusinessesController < ApplicationController
   def update
     @business = Business.find(params[:id])
     if @business.update(business_params)
-      redirect_to business_url(@business)
+      # redirect_to business_url(@business)
+      render :show
     else
       render json: @business.errors.full_messages, status: 422
     end
@@ -41,7 +42,8 @@ class Api::BusinessesController < ApplicationController
   def destroy
     @business = Business.find(params[:id])
     if @business.destroy
-      redirect_to businesses_url
+      # redirect_to businesses_url
+      render :show
     else
       render json: "Business not found."
     end
@@ -50,7 +52,7 @@ class Api::BusinessesController < ApplicationController
   private
 
   def business_params
-    params.require(:business).permit(:name,:location,:phone,:website)
+    params.require(:business).permit(:id,:name,:location,:phone,:website)
   end
 
 end
