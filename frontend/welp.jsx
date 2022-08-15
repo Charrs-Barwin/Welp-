@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import configureStore from "./store/store";
 import Root from "./components/root";
 
-import {postUser,postSession,deleteSession} from "./utils/session";
+// import {postUser,postSession,deleteSession} from "./utils/session";
 // import {createNewUser,login,logout} from "./actions/session";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -20,11 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
   
   window.store = store
 
-  window.getState = store.getState; // testing!
-  window.dispatch = store.dispatch; // testing!
+  // window.getState = store.getState; // testing!
+  // window.dispatch = store.dispatch; // testing!
 
-  window.signup = postUser;
-  window.login = postSession;
-  window.logout = deleteSession;
+  // window.signup = postUser;
+  // window.login = postSession;
+  // window.logout = deleteSession;
   ReactDOM.render(<Root store={store} />, root);
 });
