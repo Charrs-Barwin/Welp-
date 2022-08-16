@@ -39,7 +39,6 @@ class NavBar extends React.Component {
         <div>
           {display}
         </div>
-        <Link className="btn" to="/index">index link</Link>
       </header>
     );
   }

@@ -10,7 +10,7 @@ export const RECEIVE_ALL_REVIEWS = 'RECEIVE_ALL_REVIEWS';
 export const RECEIVE_REVIEW = 'RECEIVE_REVIEW';
 export const REMOVE_REVIEW = 'REMOVE_REVIEW';
 
-const receiveAllReviews = businesses => ({
+const receiveAllReviews = reviews => ({
   type: RECEIVE_ALL_REVIEWS,
   reviews
 });

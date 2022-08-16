@@ -24,11 +24,6 @@ class Api::BusinessesController < ApplicationController
     render :index
   end
 
-  def edit
-    @business = Business.find(params[:id])
-    render :edit
-  end
-
   def update
     @business = Business.find(params[:id])
     if @business.update(business_params)

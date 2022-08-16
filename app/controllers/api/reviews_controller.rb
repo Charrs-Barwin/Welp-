@@ -24,11 +24,6 @@ class Api::ReviewsController < ApplicationController
     render :index
   end
 
-  def edit
-    @review = Review.find(params[:id])
-    render :edit
-  end
-
   def update
     @review = Review.find(params[:id])
     if @review.update(review_params)
