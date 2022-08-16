@@ -1,7 +1,7 @@
 import React from 'react';
 // import BusinessIndexItem from './business_index_item';
 import { Link } from 'react-router-dom';
-import AddBusiness from './new_business_container';
+// import AddBusiness from './new_business_container';
 
 class BusinessIndex extends React.Component {
   componentDidMount() {
