@@ -12,7 +12,7 @@ const mapSTP = (state,ownProps) => ({
     business: state.entities.businesses[ownProps.match.params.id],
     errors: Object.values(state.errors),
     formType: "Edit",
-    currentUser: state.session.currentUser.id,
+    currentUser: state.session.currentUser
 })
 
 const mapDTP = (dispatch,ownProps) => ({

@@ -6,7 +6,6 @@ class User < ApplicationRecord
     has_many :businesses, foreign_key: :owner_id, class_name: :Business
     has_many :reviews, foreign_key: :user_id, class_name: :Review
     has_many :reviewed_businesses, through: :reviews, source: :business
-    # has_many :reviewers, through: :businesses, source: :reviewers
 
     after_initialize :ensure_session_token
     attr_reader :password

@@ -27,15 +27,11 @@ class BusinessForm extends React.Component {
     }
 
     handleSubmit(e) {
-        // e.preventDefault();
-        // debugger
         this.props.processForm(this.state)
         .then( (action) => {
             this.props.history.push(`/businesses/${action.bsn.id}`)
             // this.props.errors.body ? this.setState({errors: true}) : this.props.history.push('/') 
         })
-        // .then()
-        // this.props.history.push('/')
     }
 
     render() {

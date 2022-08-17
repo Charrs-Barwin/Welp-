@@ -33,12 +33,14 @@ bigburger = Business.create!(
     name: "Big Burger",
     location: "12 street",
     phone: 5555555,
-    website: "bigburger.com"
+    website: "bigburger.com",
+    owner_id: 1
 )
 
 littleburger = Business.create!(
     name: "Little Burger",
     location: "2 street",
     phone: 5555556,
-    website: "littleburger.com"
+    website: "littleburger.com",
+    owner_id: 2
 )

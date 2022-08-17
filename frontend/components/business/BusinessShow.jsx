@@ -13,12 +13,27 @@ class BusinessShow extends React.Component {
 
     handleDelete() {
         this.props.eraseBusiness()
-            .then( () => this.props.history.push('/') )
-        // this.props.history.push('/')
+            .then( () => this.props.history.push('/') ) // redirect to user page instead once implemented
     }
 
     render(){
         if (!this.props.business) return null;
+        const {currentUser,business} = this.props;
+
+        const display = currentUser ? (
+            currentUser.id === business.owner_id ? (
+                <div>                
+                    <Link to={`/businesses/${this.props.business.id}/edit`} ><button>Edit Business Information</button></Link>
+                    <br/>
+                    <Link to={'/'} > <button onClick={this.handleDelete}>Delete Business</button> </Link>
+                </div>
+            ) : (
+                <div><p>REVIEW LINK WILL BE HERE</p></div>// Review link here
+            )
+        ) : (
+            <div><p>not logged in text</p></div>// this will be blank
+        );
+        
         return(
             <div>
                 <h1>{this.props.business.name}</h1>
@@ -26,9 +41,7 @@ class BusinessShow extends React.Component {
                 <p>{this.props.business.location}</p>
                 <p>{this.props.business.phone}</p>
                 <p>{this.props.business.website}</p>
-                <Link to={`/businesses/${this.props.business.id}/edit`} ><button>Edit Business Information</button></Link>
-                <br/>
-                <Link to={'/'} > <button onClick={this.handleDelete}>Delete Business</button> </Link>
+                {display}
             </div>
         )
     }

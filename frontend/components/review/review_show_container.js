@@ -4,7 +4,7 @@ import ReviewShow from './ReviewShow';
 
 const mapSTP = (state, ownProps) => ({
     business: state.entities.businesses[ownProps.match.params.id],
-    currentUser: state.session.currentUser.id
+    currentUser: state.session.currentUser
 });
 
 const mapDTP = (dispatch, ownProps) => ({
