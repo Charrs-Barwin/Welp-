@@ -8,6 +8,7 @@
 
 Business.destroy_all
 User.destroy_all # can exist on its own
+Review.destroy_all
 # ActiveRecord::Base.connection.execute('ALTER TABLE table_name AUTO_INCREMENT = 1')
 # ActiveRecord::Base.connection.reset_pk_sequence!('users')
 # ActiveRecord::Base.connection.reset_pk_sequence!('businesses')
@@ -28,13 +29,20 @@ mike2 = User.create!(
     password: "123456"
 )
 
+mike3 = User.create!(
+    name: "mike3", 
+    email: "mike3@email.com", 
+    password: "123456"
+)
+
 #BUSINESSES
 bigburger = Business.create!(
     name: "Big Burger",
     location: "12 street",
     phone: 5555555,
     website: "bigburger.com",
-    owner_id: 1
+    owner_id: 1,
+    rating: 3.14195
 )
 
 littleburger = Business.create!(
@@ -42,5 +50,35 @@ littleburger = Business.create!(
     location: "2 street",
     phone: 5555556,
     website: "littleburger.com",
-    owner_id: 2
+    owner_id: 2,
+    rating: 3.00
+)
+
+midburger = Business.create!(
+    name: "Mid Burger",
+    location: "6 street",
+    phone: 5555557,
+    website: "midburger.com",
+    owner_id: 3,
+    rating: 2.095
+)
+
+#REVIEWS
+r1 = Review.create!(
+    user_id: 1,
+    business_id: 2,
+    rating: 1,
+    body: "burger is too little"
+)
+r2 = Review.create!(
+    user_id: 2,
+    business_id: 3,
+    rating: 4,
+    body: "just right"
+)
+r3 = Review.create!(
+    user_id: 3,
+    business_id: 1,
+    rating: 1,
+    body: "burger is too big"
 )

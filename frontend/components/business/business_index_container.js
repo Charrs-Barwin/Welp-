@@ -1,14 +1,13 @@
 import { connect } from 'react-redux';
 import BusinessIndex from './BusinessIndex'
-import { getBusinesses, getBusiness } from '../../actions/business'
+import { getBusinesses } from '../../actions/business'
 
 const mapSTP = state => ({
   businesses: Object.values(state.entities.businesses)
 });
 
 const mapDTP = dispatch => ({
-  getBusinesses: () => dispatch(getBusinesses()),
-  // getBusiness: bsnId => dispatch(getBusiness(bsnId))
+  getBusinesses: () => dispatch(getBusinesses())
 });
 
 export default connect(mapSTP, mapDTP)(BusinessIndex);

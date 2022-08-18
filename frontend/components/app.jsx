@@ -9,10 +9,6 @@ import NewBusinesContainer from './business/new_business_container';
 import EditBusinessContainer from './business/edit_business_container';
 import ShowBusinessContainer from './business/business_show_container'
 import BusinessIndexContainer from './business/business_index_container'
-import NewReviewContainer from './review/new_review_container';
-import EditReviewContainer from './review/edit_review_container';
-import ShowReviewContainer from './review/review_show_container'
-import ReviewIndexContainer from './review/review_index_container'
 
 // Route ; regular
 // AuthRoute ; only if 'not logged in', else redirraect to '/'
@@ -23,10 +19,6 @@ export default () => (
       <NavBarContainer/>
       <h4></h4>
       <Switch>
-        <Route path="/businesses/:id/reviews" component={ReviewIndexContainer} />
-        <ProtectedRoute path="/businesses/:id/review" component={NewReviewContainer} />
-        <ProtectedRoute path="/reviews/:id/edit" component={EditReviewContainer} />
-        <Route path="/reviews/:id" component={ShowReviewContainer} />
         <ProtectedRoute path="/businesses/:id/edit" component={EditBusinessContainer} />
         <Route path="/businesses/:id" component={ShowBusinessContainer} />
         <ProtectedRoute path="/create" component={NewBusinesContainer} />
