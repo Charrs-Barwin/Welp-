@@ -9,7 +9,7 @@ export default (state={},action) => {
     let ns = Object.assign({},state)
     switch (action.type) {
         case RECEIVE_ALL_REVIEWS:
-            return Object.assign(ns,action.reviews)
+            return action.reviews
         case RECEIVE_REVIEW:
             return Object.assign(ns,{ [action.review.id]: action.review })
         case REMOVE_REVIEW:

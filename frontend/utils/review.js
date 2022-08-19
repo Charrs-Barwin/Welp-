@@ -1,5 +1,6 @@
-export const fetchReviews = () => $.ajax({
+export const fetchReviews = (bsnId) => $.ajax({
   url: '/api/reviews',
+  data: { bsnId }
 });
 
 export const fetchReview = (reviewId) => $.ajax({

@@ -13,7 +13,7 @@ const mapDTP = (dispatch, ownProps) => ({
     getBusiness: () => dispatch(getBusiness(ownProps.match.params.id)),
     eraseBusiness: () => dispatch(eraseBusiness(ownProps.match.params.id)),
 
-    getReviews: () => dispatch(getReviews()),
+    getReviews: (bsnId) => dispatch(getReviews(bsnId)),
     addReview: review => dispatch(addReview(review)),
     editReview: review => dispatch(editReview(review)),
     eraseReview: review => dispatch(eraseReview(review.id))

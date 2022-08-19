@@ -7,31 +7,77 @@ class BusinessShow extends React.Component {
 
         this.state = 
         {
-            rating: 0,
-            reviews: [],
             reviewFormShow: false,
-            reviewRating: 0,
-            reviewBody: ''
+            userReview: null,
+            reviewRating: null,
+            reviewBody: null
         }
 
         this.handleDelete = this.handleDelete.bind(this)
+        this.reviewForm = this.reviewForm.bind(this)
         this.showReviewForm = this.showReviewForm.bind(this)
         this.hideReviewForm = this.hideReviewForm.bind(this)
+        this.updateRating = this.updateRating.bind(this)
+        this.updateReview = this.updateReview.bind(this)
+        this.deleteReview = this.deleteReview.bind(this)
+        this.submitReview = this.submitReview.bind(this)
     }
 
     componentDidMount() {
         this.props.getBusiness(this.props.match.params.id)
-        // this.props.getReviews()
         .then(response => {
-            this.props.getReviews()
+            this.props.getReviews(response.bsn.id)
             .then(r2 => {
-                let _reviews = [];
-                Object.values(r2.reviews).forEach(r => {
-                    if (r.business_id === response.bsn.id) {_reviews.push(r)}
-                })
-                this.setState({reviews: _reviews})
+                if (this.props.currentUser) {
+                    let _userReview = Object.values(r2.reviews).filter(review => review.user_id === this.props.currentUser.id)[0]
+                    if (_userReview) {
+                        this.setState({userReview: _userReview, reviewRating: _userReview.rating, reviewBody: _userReview.body})                        
+                    }
+                }
             })
         })
+    }
+
+    reviewForm() {
+        return (
+            <form>
+              <label>Rating:
+                <select onChange={this.updateRating} required >
+                  <option hidden disabled selected={!this.state.reviewRating} value ></option>
+                  <option value={1} selected={this.state.reviewRating == 1} >1</option>
+                  <option value={2} selected={this.state.reviewRating == 2} >2</option>
+                  <option value={3} selected={this.state.reviewRating == 3} >3</option>
+                  <option value={4} selected={this.state.reviewRating == 4} >4</option>
+                  <option value={5} selected={this.state.reviewRating == 5} >5</option>
+                </select>
+              </label>
+              <br/>
+              <textarea cols="50" rows="4" placeholder='Review' onChange={this.updateReview} value={this.state.reviewBody||''} />
+              <br/>
+              <input type='submit' value='submit' onClick={this.submitReview}/>
+            </form>
+        )
+    }
+
+    updateRating(e) {
+        e.preventDefault()
+        this.setState({reviewRating: e.currentTarget.value})
+    }
+
+    updateReview(e) {
+        e.preventDefault()
+        this.setState({reviewBody: e.currentTarget.value})
+    }
+
+    submitReview() {
+        console.log(this.state.reviewRating);
+        console.log(this.state.reviewBody);
+        console.log(this.props.business.id);
+        console.log(this.props.currentUser.id);
+    }
+
+    deleteReview() {
+        this.props.eraseReview(this.state.userReview)
     }
 
     showReviewForm() {
@@ -59,10 +105,18 @@ class BusinessShow extends React.Component {
                 <Link to={'/'} > <button onClick={this.handleDelete}>Delete Business</button> </Link>
                 </div>
             ) : !this.state.reviewFormShow ? (
-                <button onClick={this.showReviewForm}>write review</button>
+                this.state.userReview ? (
+                    <div>
+                    <button onClick={this.showReviewForm}>edit review</button>
+                    <br/>
+                    <button onClick={this.deleteReview}>delete review</button>
+                    </div>
+                ) : (
+                    <button onClick={this.showReviewForm}>write review</button>
+                )
             ) : (
                 <div>
-                <p>review form here</p>
+                {this.reviewForm()}
                 <button onClick={this.hideReviewForm}>cancel</button>
                 </div>
             )
@@ -71,7 +125,7 @@ class BusinessShow extends React.Component {
         ) : (
             <p>please log in to write reviews</p>
         );
-
+        //console.log(this.state.userReview ? 'YES' : 'NO');
         return(
             <div>
                 <h1>{this.props.business.name}</h1>
@@ -84,7 +138,7 @@ class BusinessShow extends React.Component {
                 {input}                
                 <ul>
                 {
-                this.state.reviews.map(review => (
+                this.props.reviews.map(review => (
                     <div key={review.id}>
                     <h3>{review.rating}</h3>
                     <h5>{review.body}</h5>

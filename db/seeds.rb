@@ -67,7 +67,7 @@ midburger = Business.create!(
 r1 = Review.create!(
     user_id: 1,
     business_id: 2,
-    rating: 1,
+    rating: 2,
     body: "burger is too little"
 )
 r2 = Review.create!(

@@ -25,7 +25,7 @@ const removeReview = reviewId => ({
   reviewId
 });
 
-export const getReviews = () => dispatch => fetchReviews()
+export const getReviews = (bsnId) => dispatch => fetchReviews(bsnId)
     .then(reviews => dispatch(receiveAllReviews(reviews)))
 
 export const getReview = reviewId => dispatch => fetchReview(reviewId)

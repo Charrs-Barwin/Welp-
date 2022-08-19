@@ -20,7 +20,7 @@ class Api::ReviewsController < ApplicationController
   end
 
   def index
-    @reviews = Review.all
+    @reviews = Review.where(business_id: params[:bsnId])
     render :index
   end
 
