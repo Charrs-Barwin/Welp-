@@ -70,6 +70,7 @@ class BusinessShow extends React.Component {
     }
 
     submitReview() {
+        if (!this.state.reviewRating) {return}
         let _review = {
             body: this.state.reviewBody,
             rating: this.state.reviewRating
