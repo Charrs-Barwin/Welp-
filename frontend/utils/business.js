@@ -15,7 +15,6 @@ export const createBusiness = business => (
 );
 
 export const updateBusiness = business => {
-  console.log(business);
   return $.ajax({
     url: '/api/businesses/'+business.id,
     method: 'patch',

@@ -3,6 +3,7 @@ class Api::BusinessesController < ApplicationController
   def create
     @business = Business.new(business_params)
     @business.owner_id = current_user.id
+    @business.rating = 0
     if @business.save
       render :show
     else
@@ -45,7 +46,7 @@ class Api::BusinessesController < ApplicationController
   private
 
   def business_params
-    params.require(:business).permit(:id,:name,:location,:phone,:website)
+    params.require(:business).permit(:id,:name,:location,:phone,:website,:rating)
   end
 
 end

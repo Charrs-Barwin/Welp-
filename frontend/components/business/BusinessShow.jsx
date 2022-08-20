@@ -17,8 +17,8 @@ class BusinessShow extends React.Component {
         this.reviewForm = this.reviewForm.bind(this)
         this.showReviewForm = this.showReviewForm.bind(this)
         this.hideReviewForm = this.hideReviewForm.bind(this)
-        this.updateRating = this.updateRating.bind(this)
         this.updateReview = this.updateReview.bind(this)
+        this.updateRating = this.updateRating.bind(this)
         this.deleteReview = this.deleteReview.bind(this)
         this.submitReview = this.submitReview.bind(this)
     }
@@ -60,24 +60,54 @@ class BusinessShow extends React.Component {
     }
 
     updateRating(e) {
-        e.preventDefault()
+        e.preventDefault();
         this.setState({reviewRating: e.currentTarget.value})
     }
 
     updateReview(e) {
-        e.preventDefault()
+        e.preventDefault();
         this.setState({reviewBody: e.currentTarget.value})
     }
 
     submitReview() {
-        console.log(this.state.reviewRating);
-        console.log(this.state.reviewBody);
-        console.log(this.props.business.id);
-        console.log(this.props.currentUser.id);
+        let _review = {
+            body: this.state.reviewBody,
+            rating: this.state.reviewRating
+        }
+        let process;
+        if (this.state.userReview) {
+            process = this.props.editReview
+            _review = Object.assign(this.state.userReview,_review)
+        } else {
+            process = this.props.addReview
+            _review = Object.assign(_review,{business_id: this.props.business.id})
+        }
+        process(_review)
+        .then((response)=>{
+            const ratings = this.props.reviews.map(review=>review.rating)
+            const newAvg = ratings.length ? eval(ratings.join('+')) / ratings.length : 0
+            this.props.editBusiness(Object.assign(this.props.business,{rating: newAvg}))
+            .then(()=>{
+                this.setState({userReview: response.review, reviewFormShow: false})
+            })
+        })
     }
 
     deleteReview() {
         this.props.eraseReview(this.state.userReview)
+        .then(()=>{
+            const ratings = this.props.reviews.map(review=>review.rating)
+            const newAvg = ratings.length ? eval(ratings.join('+')) / ratings.length : 0
+            this.props.editBusiness(Object.assign(this.props.business,{rating: newAvg}))
+            .then(()=>{
+                this.setState({
+                    reviewFormShow: false,
+                    userReview: null,
+                    reviewRating: null,
+                    reviewBody: null
+                })
+            })
+        })
     }
 
     showReviewForm() {

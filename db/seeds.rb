@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Business.destroy_all
-User.destroy_all # can exist on its own
+User.destroy_all
 Review.destroy_all
 # ActiveRecord::Base.connection.execute('ALTER TABLE table_name AUTO_INCREMENT = 1')
 # ActiveRecord::Base.connection.reset_pk_sequence!('users')
@@ -32,6 +32,12 @@ mike2 = User.create!(
 mike3 = User.create!(
     name: "mike3", 
     email: "mike3@email.com", 
+    password: "123456"
+)
+
+mike4 = User.create!(
+    name: "mike4", 
+    email: "mike4@email.com", 
     password: "123456"
 )
 
@@ -61,6 +67,15 @@ midburger = Business.create!(
     website: "midburger.com",
     owner_id: 3,
     rating: 2.095
+)
+
+badburger = Business.create!(
+    name: "BAD Burger",
+    location: "14 BAD st.",
+    phone: 5555566,
+    website: "badburger.com",
+    owner_id: 4,
+    rating: 5
 )
 
 #REVIEWS
