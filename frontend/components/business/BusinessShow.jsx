@@ -26,6 +26,12 @@ class BusinessShow extends React.Component {
     componentDidMount() {
         this.props.getBusiness(this.props.match.params.id)
         .then(response => {
+            // if (this.props.currentUser) {
+            //     let _userReview = response.bsn.reviews.filter(review => review.user_id === this.props.currentUser.id)[0]
+            //     if (_userReview) {
+            //         this.setState({userReview: _userReview, reviewRating: _userReview.rating, reviewBody: _userReview.body})                        
+            //     }
+            // }
             this.props.getReviews(response.bsn.id)
             .then(r2 => {
                 if (this.props.currentUser) {
@@ -85,6 +91,7 @@ class BusinessShow extends React.Component {
         }
         process(_review)
         .then((response)=>{
+            // this.setState({userReview: response.review, reviewFormShow: false})
             const ratings = this.props.reviews.map(review=>review.rating)
             const newAvg = ratings.length ? eval(ratings.join('+')) / ratings.length : 0
             this.props.editBusiness(Object.assign(this.props.business,{rating: newAvg}))
@@ -97,6 +104,12 @@ class BusinessShow extends React.Component {
     deleteReview() {
         this.props.eraseReview(this.state.userReview)
         .then(()=>{
+            // this.setState({
+            //     reviewFormShow: false,
+            //     userReview: null,
+            //     reviewRating: null,
+            //     reviewBody: null
+            // })
             const ratings = this.props.reviews.map(review=>review.rating)
             const newAvg = ratings.length ? eval(ratings.join('+')) / ratings.length : 0
             this.props.editBusiness(Object.assign(this.props.business,{rating: newAvg}))
@@ -161,7 +174,7 @@ class BusinessShow extends React.Component {
             <div>
                 <h1>{this.props.business.name}</h1>
                 <h6>rating </h6>
-                <h6>{this.props.business.rating}</h6>
+                <h6>{this.props.business.rating||this.props.business.avgRating||'N/A'}</h6>
                 <h3>show page</h3>
                 <p>{this.props.business.location}</p>
                 <p>{this.props.business.phone}</p>
@@ -173,6 +186,7 @@ class BusinessShow extends React.Component {
                     <div key={review.id}>
                     <h3>{review.rating}</h3>
                     <h5>{review.body}</h5>
+                    <h6>{review.author.name}</h6>
                     </div>
                 ))
                 }

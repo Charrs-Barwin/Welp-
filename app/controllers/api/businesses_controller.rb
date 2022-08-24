@@ -3,7 +3,6 @@ class Api::BusinessesController < ApplicationController
   def create
     @business = Business.new(business_params)
     @business.owner_id = current_user.id
-    @business.rating = 0
     if @business.save
       render :show
     else
