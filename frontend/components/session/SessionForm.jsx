@@ -30,7 +30,7 @@ class SessionForm extends React.Component {
         return formType==='signup' ? (
             <div>
                 <label>email{' '}
-                    <input type="text" value={this.state.email} onChange={this.handleInput('email')}/>
+                    <input type="email" value={this.state.email} onChange={this.handleInput('email')}/>
                 </label>
                 <br/>
             </div>
