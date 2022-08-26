@@ -19,7 +19,7 @@ class NavBar extends React.Component {
     const display = currentUser ? (
       <div>
         <p>Hello, {currentUser.name}</p>
-        <Link className="btn" to="/" onClick={this.props.logout}><button> Logout! </button></Link>
+        <button onClick={this.handleLogout} > Logout! </button>
         <br/>
         <Link className="btn" to="/create">Add New Business</Link>
       </div>

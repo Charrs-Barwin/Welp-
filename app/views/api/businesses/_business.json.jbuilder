@@ -1,2 +1,2 @@
-json.extract! business, :id, :name, :location, :phone, :website, :owner_id, :rating, :owner, :reviews, :avgRating#, :reviewers
+json.extract! business, :id, :name, :location, :phone, :website, :owner_id, :rating, :owner, :reviews, :avgRating, :reviewers
 # json.userReview current_user ? business.reviews.find_by(user_id: current_user.id) : nil
