@@ -7,8 +7,7 @@ class BusinessIndex extends React.Component {
       this.state = {
         searchInput:'',
         searchText:'',
-        search:'',
-        activeSearch: false
+        search:''
       }
       this.handleSearch = this.handleSearch.bind(this)
   }
@@ -18,11 +17,7 @@ class BusinessIndex extends React.Component {
   }
 
   handleInput() {
-    return (e) => this.setState(this.state.activeSearch ? {
-      searchInput: e.currentTarget.value,
-      searchText: e.currentTarget.value, 
-      search: new RegExp(e.currentTarget.value,'i')
-    } : {searchInput: e.currentTarget.value})
+    return (e) => this.setState({searchInput: e.currentTarget.value})
   }
 
   handleSearch() {
@@ -40,17 +35,9 @@ class BusinessIndex extends React.Component {
     let {businesses} = this.props
     return (
       <div>
-      <label>Active search: 
-        <label> off
-        <input type="radio" name='activeSearchToggle' checked={!this.state.activeSearch} value={false} onChange={this.activeSearchToggle()} />          
-        </label>
-        <label>on
-        <input type="radio" name='activeSearchToggle' checked={this.state.activeSearch} value={true} onChange={this.activeSearchToggle()} />          
-        </label>
-      </label>
       <form>
         <input type="text" value={this.state.searchInput} placeholder='search' onChange={this.handleInput()} />
-        {this.state.activeSearch ? null : <button type='submit' onClick={this.handleSearch} >search</button>}
+        <button type='submit' onClick={this.handleSearch} >search</button>
       </form>
       
       <ul>
