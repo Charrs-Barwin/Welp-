@@ -3,7 +3,6 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { AuthRoute,ProtectedRoute } from "../utils/route_utils";
 import SignupContainer from "./session/signup_container";
 import LoginContainer from "./session/login_container";
-// import WelcomeBar from './nav_bar/welcome_bar_container';
 import NavBarContainer from './nav_bar/nav_bar_container';
 import NewBusinesContainer from './business/new_business_container';
 import EditBusinessContainer from './business/edit_business_container';
@@ -24,6 +23,7 @@ export default () => (
         <ProtectedRoute path="/create" component={NewBusinesContainer} />
         <AuthRoute path="/signup" component={SignupContainer} />
         <AuthRoute path="/login" component={LoginContainer} />
+        <Route path="/businesses" component={BusinessIndexContainer} />
         <Route path="/" component={BusinessIndexContainer} />
         <Redirect to="/" />
       </Switch>
