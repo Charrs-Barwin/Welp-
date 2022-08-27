@@ -22,7 +22,9 @@ class SessionForm extends React.Component {
         e.preventDefault();
         this.props.processForm(this.state)
         .then( () => {
-            this.props.history.goBack() // find way to push previous url instead
+            // this.props.history.goBack() // find way to push previous url instead
+            if (this.props.location.state) {this.props.history.push(this.props.location.state.previous)}
+            else {this.props.history.goBack()}
         })
     }
 

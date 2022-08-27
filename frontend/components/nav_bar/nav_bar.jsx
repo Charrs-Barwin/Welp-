@@ -10,7 +10,7 @@ class NavBar extends React.Component {
   handleLogout(e) {
     e.preventDefault();
     this.props.logout()
-    .then(()=>this.props.history.push('/login'))
+    .then(()=>this.props.history.push({pathname:'/login',state:{previous:this.props.location.pathname}}))
   }
 
   render() {
@@ -21,13 +21,13 @@ class NavBar extends React.Component {
         <p>Hello, {currentUser.name}</p>
         <button onClick={this.handleLogout} > Logout! </button>
         <br/>
-        <Link className="btn" to="/create">Add New Business</Link>
+        <Link to="/create">Add New Business</Link>
       </div>
     ) : (
       <div>
-        <Link className="btn" to="/signup"><button>Sign Up</button></Link>
+        <Link to={{pathname:'/signup',state:{previous:this.props.location.pathname}}}><button>Sign Up</button></Link>
         <br/>
-        <Link className="btn" to="/login"><button>Log In</button></Link>
+        <Link to={{pathname:'/login',state:{previous:this.props.location.pathname}}}><button>Log In</button></Link>
       </div>
     );
     
@@ -36,6 +36,7 @@ class NavBar extends React.Component {
         <Link to='/'>
         <h1 className="logo">Welp</h1>
         </Link>
+        <h6>{this.props.location.pathname}</h6>
         <div>
           {display}
         </div>
