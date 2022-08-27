@@ -5,46 +5,46 @@ class BusinessIndex extends React.Component {
   constructor(props){
       super(props)
       this.state = {
-        searchInput:'',
-        searchText:'',
-        search:''
+        searchInput:''
       }
-      this.handleSearch = this.handleSearch.bind(this)
+      // this.handleSearch = this.handleSearch.bind(this)
   }
   
   componentDidMount() {
-    this.props.getBusinesses();
+    this.setState(this.props.location.state||this.state)
+    this.props.getBusinesses()
+    // .then(this.setState(this.props.location.state))
   }
 
-  handleInput() {
-    return (e) => this.setState({searchInput: e.currentTarget.value})
+  componentDidUpdate(prevProps) {
+    // debugger
+    let prevSearch = (prevProps.location.state||this.state).searchInput;
+    let newSearch = (this.props.location.state||this.state).searchInput;
+    if (prevSearch !== newSearch) {
+      this.setState(this.props.location.state||this.state)
+    }
   }
 
-  handleSearch() {
-    this.setState({
-      searchText: this.state.searchInput,
-      search: new RegExp(this.state.searchInput,'i')
-    })
-  }
+  // handleInput() {
+  //   return (e) => this.setState({searchInput: e.currentTarget.value})
+  // }
 
-  activeSearchToggle() {
-    return (e) => this.setState({activeSearch: e.currentTarget.value === 'true' })
-  }
+  // handleSearch() {
+  //   this.setState({
+  //     searchText: this.state.searchInput,
+  //     search: new RegExp(this.state.searchInput,'i')
+  //   })
+  // }
 
   render() {
     let {businesses} = this.props
     return (
-      <div>
-      <form>
-        <input type="text" value={this.state.searchInput} placeholder='search' onChange={this.handleInput()} />
-        <button type='submit' onClick={this.handleSearch} >search</button>
-      </form>
-      
       <ul>
         {
           businesses.filter(bsn => {
+            const searchExpression = new RegExp(this.state.searchInput,'i')
             const bsnParams = [bsn.location,bsn.phone||''.toString(),bsn.website,bsn.owner.name]
-            return bsn.name.match(this.state.search) || bsnParams.some(param=> param == this.state.searchText)
+            return bsn.name.match(searchExpression) || bsnParams.some(param=> param == this.state.searchInput)
           }).sort((a,b)=> b.avgRating - a.avgRating)
           .map(bsn => (
             <div key={bsn.id}>
@@ -54,7 +54,6 @@ class BusinessIndex extends React.Component {
           ))
         }
       </ul>
-      </div>
     );
   }
 }

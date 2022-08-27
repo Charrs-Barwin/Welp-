@@ -5,9 +5,7 @@ class NavBar extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      searchInput:'',
-      searchText:'',
-      search:''
+      searchInput:''
     }
     this.handleInput = this.handleInput.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
@@ -19,16 +17,20 @@ class NavBar extends React.Component {
   }
 
   handleSearch() {
-    this.setState({
-      searchText: this.state.searchInput,
-      search: new RegExp(this.state.searchInput,'i')
-    })
+    this.props.history.push({pathname:'/businesses',state:this.state})
+    // if (this.props.location.pathname === '/businesses'){
+    //   this.setState({searchInput: this.state.searchInput})
+    //   window.location.reload();
+    // }
+    // else {
+    //   this.props.history.push({pathname:'/businesses',state:this.state})
+    //  }
   }
 
   handleLogout(e) {
     e.preventDefault();
     this.props.logout()
-    .then(()=>this.props.history.push('/login'))
+    .then(()=>this.props.history.push({pathname:'/login',state:{previous:this.props.location.pathname}}))
   }
 
   render() {
@@ -55,7 +57,7 @@ class NavBar extends React.Component {
         <h1 className="logo">Welp</h1>
         </Link>
         <h6>{this.props.location.pathname}</h6>
-        <Link to="/businesses">Index</Link>
+        <Link to={{pathname:"/businesses",state:this.state}} replace >Index</Link>
         <form>
           <input type="text" value={this.state.searchInput} placeholder='search' onChange={this.handleInput()} />
           <button type='submit' onClick={this.handleSearch} >search</button>
