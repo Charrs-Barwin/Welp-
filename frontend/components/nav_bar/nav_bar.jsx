@@ -4,7 +4,19 @@ import { Link } from 'react-router-dom';
 class NavBar extends React.Component {
   constructor(props){
     super(props)
+    this.state = {searchInput:''}
+
+    this.handleInput = this.handleInput.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
+  }
+
+  handleInput() {
+    return (e) => this.setState({searchInput: e.currentTarget.value})
+  }
+
+  handleSearch() {
+    this.props.history.push('/search/'+this.state.searchInput)
   }
 
   handleLogout(e) {
@@ -37,6 +49,10 @@ class NavBar extends React.Component {
         <h1 className="logo">Welp</h1>
         </Link>
         <h6>{this.props.location.pathname}</h6>
+        <form>
+          <input type="text" value={this.state.searchInput} placeholder='search' onChange={this.handleInput()} />
+          <button type='submit' onClick={this.handleSearch} >search</button>
+        </form>
         <div>
           {display}
         </div>

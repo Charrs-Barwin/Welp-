@@ -23,7 +23,7 @@ export default () => (
         <ProtectedRoute path="/create" component={NewBusinesContainer} />
         <AuthRoute path="/signup" component={SignupContainer} />
         <AuthRoute path="/login" component={LoginContainer} />
-        <Route path="/businesses" component={BusinessIndexContainer} />
+        <Route path="/search/:id" component={BusinessIndexContainer} />
         <Route path="/" component={BusinessIndexContainer} />
         <Redirect to="/" />
       </Switch>
