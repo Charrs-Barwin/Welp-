@@ -4,48 +4,34 @@ import { Link } from 'react-router-dom';
 class BusinessIndex extends React.Component {
   constructor(props){
       super(props)
-      this.state = {
-        searchInput:''
-      }
-      // this.handleSearch = this.handleSearch.bind(this)
+      this.state = {searchInput:''}
   }
   
   componentDidMount() {
-    this.setState(this.props.location.state||this.state)
+    this.setState({searchInput: this.props.match.params.id||''})
     this.props.getBusinesses()
-    // .then(this.setState(this.props.location.state))
   }
 
   componentDidUpdate(prevProps) {
-    // debugger
-    let prevSearch = (prevProps.location.state||this.state).searchInput;
-    let newSearch = (this.props.location.state||this.state).searchInput;
+    let prevSearch = prevProps.match.params.id;
+    let newSearch = this.props.match.params.id;
     if (prevSearch !== newSearch) {
-      this.setState(this.props.location.state||this.state)
+      this.setState({searchInput: this.props.match.params.id})
     }
   }
 
-  // handleInput() {
-  //   return (e) => this.setState({searchInput: e.currentTarget.value})
-  // }
-
-  // handleSearch() {
-  //   this.setState({
-  //     searchText: this.state.searchInput,
-  //     search: new RegExp(this.state.searchInput,'i')
-  //   })
-  // }
-
   render() {
     let {businesses} = this.props
+    let results = businesses.filter(bsn => {
+      const searchExpression = new RegExp(this.state.searchInput,'i')
+      const bsnParams = [bsn.location,bsn.phone||''.toString(),bsn.website,bsn.owner.name]
+      return bsn.name.match(searchExpression) || bsnParams.some(param=> param == this.state.searchInput)
+    })
+    if (!results.length) return <h6>No search results</h6>
     return (
       <ul>
         {
-          businesses.filter(bsn => {
-            const searchExpression = new RegExp(this.state.searchInput,'i')
-            const bsnParams = [bsn.location,bsn.phone||''.toString(),bsn.website,bsn.owner.name]
-            return bsn.name.match(searchExpression) || bsnParams.some(param=> param == this.state.searchInput)
-          }).sort((a,b)=> b.avgRating - a.avgRating)
+          results.sort((a,b)=> b.avgRating - a.avgRating)
           .map(bsn => (
             <div key={bsn.id}>
               <Link to={`/businesses/${bsn.id}`} >{bsn.name}</Link>
