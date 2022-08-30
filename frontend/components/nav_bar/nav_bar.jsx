@@ -33,7 +33,7 @@ class NavBar extends React.Component {
         <p>Hello, {currentUser.name}</p>
         <button onClick={this.handleLogout} > Logout! </button>
         <br/>
-        <Link to="/create">Add New Business</Link>
+        <Link to="/create"> <button>Add Business</button></Link>
       </div>
     ) : (
       <div>
@@ -46,16 +46,14 @@ class NavBar extends React.Component {
     return (
       <header className="nav-bar">
         <Link to='/'>
-        <h1 className="logo">Welp</h1>
+          <h1 className="logo">Welp</h1>
         </Link>
         <h6>{this.props.location.pathname}</h6>
+        {display}
         <form>
           <input type="text" value={this.state.searchInput} placeholder='search' onChange={this.handleInput()} />
           <button type='submit' onClick={this.handleSearch} >search</button>
         </form>
-        <div>
-          {display}
-        </div>
       </header>
     );
   }

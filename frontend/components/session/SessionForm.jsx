@@ -22,7 +22,6 @@ class SessionForm extends React.Component {
         e.preventDefault();
         this.props.processForm(this.state)
         .then( () => {
-            // this.props.history.goBack() // find way to push previous url instead
             if (this.props.location.state) {this.props.history.push(this.props.location.state.previous)}
             else {this.props.history.goBack()}
         })
@@ -47,7 +46,7 @@ class SessionForm extends React.Component {
         return (
             <div className='session-form'>
                 <h2>{formType}</h2>
-                <Link className="btn" to={"/"+otherForm}>{otherForm}</Link>
+                <Link to={{pathname:("/"+otherForm),state:{previous: this.props.location.state.previous}}} >{otherForm}</Link>
                 <form onSubmit={this.handleSubmit}>
                     <br/>
                     <label>Username{' '}
