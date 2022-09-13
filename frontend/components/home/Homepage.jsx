@@ -35,7 +35,7 @@ class BusinessIndex extends React.Component {
           .map(bsn => (
             <div key={bsn.id}>
               <Link to={`/businesses/${bsn.id}`} >{bsn.name}</Link>
-              <br/>
+              <h6> {bsn.avgRating}</h6>
             </div>
           ))
         }

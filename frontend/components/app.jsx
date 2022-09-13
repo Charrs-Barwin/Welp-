@@ -27,6 +27,7 @@ export default () => (
         <AuthRoute path="/signup" component={SignupContainer} />
         <AuthRoute path="/login" component={LoginContainer} />
         <Route path="/search/:id" component={BusinessIndexContainer} />
+        <Route path="/search" component={BusinessIndexContainer} />
         <Route path="/" component={HomepageContainer} />
         <Redirect to="/" />
       </Switch>
