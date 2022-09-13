@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class BusinessIndex extends React.Component {
+class Homepage extends React.Component {
   constructor(props){
       super(props)
       this.state = {searchInput:''}
@@ -44,4 +44,4 @@ class BusinessIndex extends React.Component {
   }
 }
 
-export default BusinessIndex;
+export default Homepage;
