@@ -12,7 +12,7 @@ class Api::UsersController < ApplicationController
     end
 
     def show
-        @user = User.find(params[:id])
+        @user = User.includes(:reviews).find(params[:id])
         # render @user ? :show : json: ["User not found"], status: 404
         if @user
             render :show

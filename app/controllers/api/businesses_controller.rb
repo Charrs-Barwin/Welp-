@@ -11,7 +11,7 @@ class Api::BusinessesController < ApplicationController
   end
 
   def show
-    @business = Business.find(params[:id])
+    @business = Business.includes(:reviews).find(params[:id])
     if @business
       render :show
     else
@@ -20,7 +20,7 @@ class Api::BusinessesController < ApplicationController
   end
 
   def index
-    @businesses = Business.all
+    @businesses = Business.includes(:reviews,:reviewers).all
     render :index
   end
 

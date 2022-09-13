@@ -37,7 +37,7 @@ class BusinessShow extends React.Component {
                 if (this.props.currentUser) {
                     let _userReview = Object.values(r2.reviews).filter(review => review.user_id === this.props.currentUser.id)[0]
                     if (_userReview) {
-                        this.setState({userReview: _userReview, reviewRating: _userReview.rating, reviewBody: _userReview.body})                        
+                        this.setState({userReview: _userReview, reviewRating: _userReview.rating, reviewBody: _userReview.body})
                     }
                 }
             })
@@ -134,7 +134,7 @@ class BusinessShow extends React.Component {
 
     handleDelete() {
         this.props.eraseBusiness()
-            .then( () => this.props.history.push('/') ) // redirect to user page instead once implemented
+            .then( () => this.props.history.push('/profile') )
     }
 
     render(){
@@ -168,8 +168,8 @@ class BusinessShow extends React.Component {
             <button onClick={this.showReviewForm}>write review</button>
         ) : (
             <p>please log in to write reviews</p>
-        );
-        //console.log(this.state.userReview ? 'YES' : 'NO');
+        );  // end input
+        
         return(
             <div>
                 <h1>{this.props.business.name}</h1>

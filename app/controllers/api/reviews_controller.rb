@@ -11,7 +11,7 @@ class Api::ReviewsController < ApplicationController
   end
 
   def show
-    @review = Review.find(params[:id])
+    @review = Review.includes(:business).find(params[:id])
     if @review
       render :show
     else
