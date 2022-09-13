@@ -47,6 +47,7 @@ bigburger = Business.create!(
     location: "12 street",
     phone: 5555555,
     website: "bigburger.com",
+    rating: 1,
     owner_id: 1
 )
 
@@ -55,6 +56,7 @@ littleburger = Business.create!(
     location: "2 street",
     phone: 5555556,
     website: "littleburger.com",
+    rating: 2,
     owner_id: 2
 )
 
@@ -63,6 +65,7 @@ midburger = Business.create!(
     location: "6 street",
     phone: 5555557,
     website: "midburger.com",
+    rating: 4,
     owner_id: 3
 )
 

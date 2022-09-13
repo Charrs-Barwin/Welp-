@@ -31,6 +31,7 @@ class NavBar extends React.Component {
     const display = currentUser ? (
       <div>
         <p>Hello, {currentUser.name}</p>
+        {this.props.location.pathname != '/profile' ? (<div><Link to="/profile">Profile</Link><br/></div>) : null}
         <button onClick={this.handleLogout} > Logout! </button>
         <br/>
         <Link to="/create"> <button>Add Business</button></Link>
