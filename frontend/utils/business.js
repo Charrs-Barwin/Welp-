@@ -10,15 +10,19 @@ export const createBusiness = business => (
   $.ajax({
     url: '/api/businesses/',
     method: 'POST',
-    data: { business }
+    data: business,
+    contentType: false,
+    processData: false
   })
 );
 
 export const updateBusiness = business => {
   return $.ajax({
-    url: '/api/businesses/'+business.id,
+    url: '/api/businesses/'+business.get('business[id]'),
     method: 'patch',
-    data: { business }
+    data: business,
+    contentType: false,
+    processData: false
   })
 };
 

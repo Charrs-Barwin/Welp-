@@ -3,13 +3,9 @@ import { Link } from 'react-router-dom';
 
 class UserShow extends React.Component {
 
-    // componentDidMount() {
-    //     this.props.getBusinesses();
-    // }
-
     render(){
         if (!this.props.currentUser) return null;
-        const {currentUser,businesses} = this.props;
+        const {currentUser} = this.props;
 
         return(
             <div>
@@ -27,6 +23,7 @@ class UserShow extends React.Component {
                     <li>{business.location}</li>
                     <li>{business.phone}</li>
                     <li>{business.website}</li>
+                    <br/>
                     </div>
                 ))
                 }

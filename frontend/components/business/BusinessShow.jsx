@@ -144,7 +144,7 @@ class BusinessShow extends React.Component {
         const input = currentUser ? (
             currentUser.id === business.owner_id ? (
                 <div>                
-                <Link to={`/businesses/${this.props.business.id}/edit`} ><button>Edit Business Information</button></Link>
+                <Link to={`/businesses/${business.id}/edit`} ><button>Edit Business Information</button></Link>
                 <br/>
                 <Link to={'/'} > <button onClick={this.handleDelete}>Delete Business</button> </Link>
                 </div>
@@ -172,13 +172,14 @@ class BusinessShow extends React.Component {
         
         return(
             <div>
-                <h1>{this.props.business.name}</h1>
+                <h1>{business.name}</h1>
                 <h6>rating </h6>
-                <h6>{this.props.business.rating||this.props.business.avgRating||'N/A'}</h6>
+                <h6>{business.rating||business.avgRating||'N/A'}</h6>
+                {business.photoUrl ? <img src={business.photoUrl} height='128' width='128' alt="no image :(" /> : null}
                 <h3>show page</h3>
-                <p>{this.props.business.location}</p>
-                <p>{this.props.business.phone}</p>
-                <p>{this.props.business.website}</p>
+                <p>{business.location}</p>
+                <p>{business.phone}</p>
+                <p>{business.website}</p>
                 {input}                
                 <ul>
                 {
