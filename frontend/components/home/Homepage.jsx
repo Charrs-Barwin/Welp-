@@ -34,7 +34,11 @@ class Homepage extends React.Component {
           results.sort((a,b)=> b.avgRating - a.avgRating)
           .map(bsn => (
             <div key={bsn.id}>
-              {bsn.photoUrl ? <img src={bsn.photoUrl} height='128' width='128' alt="no image :(" /> : null}
+              {bsn.photoUrl ? 
+                <Link to={`/businesses/${bsn.id}`} > 
+                  <input type="image" src={bsn.photoUrl} height='128' width='128' /> 
+                </Link> 
+                : null}
               <Link to={`/businesses/${bsn.id}`} >{bsn.name}</Link>
               <h6> {bsn.avgRating}</h6>
             </div>
