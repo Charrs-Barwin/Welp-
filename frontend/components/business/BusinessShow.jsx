@@ -176,6 +176,7 @@ class BusinessShow extends React.Component {
                 <h6>rating </h6>
                 <h6>{business.rating||business.avgRating||'N/A'}</h6>
                 {business.photoUrl ? <img src={business.photoUrl} height='128' width='128' alt="no image :(" /> : null}
+                {business.photoUrls ? business.photoUrls.map((url,i)=> <img key={i} src={url} height='128' width='128' alt="no image :(" />) : null}
                 <h3>show page</h3>
                 <p>{business.location}</p>
                 <p>{business.phone}</p>

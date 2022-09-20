@@ -6,6 +6,7 @@ class Business < ApplicationRecord
     has_many :reviewers, through: :reviews, source: :author
     
     has_one_attached :photo
+    has_many_attached :photos
 
     def avgRating()
         ratings = self.reviews.map {|r|r.rating}

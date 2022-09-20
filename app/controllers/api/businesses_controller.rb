@@ -11,7 +11,7 @@ class Api::BusinessesController < ApplicationController
   end
 
   def show
-    @business = Business.includes(:reviews).find(params[:id])
+    @business = Business.with_attached_photos.includes(:reviews).find(params[:id])
     if @business
       render :show
     else
@@ -20,7 +20,7 @@ class Api::BusinessesController < ApplicationController
   end
 
   def index
-    @businesses = Business.includes(:reviews,:reviewers).all
+    @businesses = Business.with_attached_photos.includes(:reviews,:reviewers).all
     render :index
   end
 
@@ -45,7 +45,7 @@ class Api::BusinessesController < ApplicationController
   private
 
   def business_params
-    params.require(:business).permit(:id,:name,:location,:phone,:website,:rating,:photo)
+    params.require(:business).permit(:id,:name,:location,:phone,:website,:rating,:photo, photos: [])
   end
 
 end
