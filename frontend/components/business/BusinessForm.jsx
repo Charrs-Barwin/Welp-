@@ -17,6 +17,9 @@ class BusinessForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleFile = this.handleFile.bind(this)
         this.handleGallery = this.handleGallery.bind(this)
+        this.changeState = this.changeState.bind(this)
+        this.deleteThumbnail = this.deleteThumbnail.bind(this)
+        this.deleteGallery = this.deleteGallery.bind(this)
         this.deletePhoto = this.deletePhoto.bind(this)
     }
     
@@ -90,7 +93,7 @@ class BusinessForm extends React.Component {
         .then( (action) => this.props.history.push(`/businesses/${action.bsn.id}`) )
     }
 
-    deletePhoto(e) {
+    deleteThumbnail(e) {
         e.preventDefault();
         const formData = new FormData();
         formData.append('business[id]', this.state.id);
@@ -99,9 +102,46 @@ class BusinessForm extends React.Component {
         .then( () => this.setState({ photo: null, photoUrl: '' }) )
     }
 
+    deleteGallery(e) {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('business[id]', this.state.id);
+        formData.append('business[photos][]', null);
+        this.props.processForm(formData)
+        .then( () => this.setState({ photos: [], photoUrls: [] }) )
+    }
+
+    deletePhoto(index) {
+        return (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData();
+            formData.append('business[id]', this.state.id);
+            formData.append('business[photos][]', index);
+
+            let remaining_urls = [...this.state.photoUrls]
+            remaining_urls.splice(index,1)
+
+            if (this.state.previousPhotos && !(this.state.previousPhotos.length > index)) {
+                let remaining_photos = [...this.state.photos]
+                remaining_photos.splice(index-this.state.previousPhotos.length,1)
+                this.setState({ photos: remaining_photos, photoUrls: remaining_urls })
+            } else {
+                this.props.processForm(formData)
+                .then( () => this.setState({ photoUrls: remaining_urls }) )
+            }
+        }
+    }
+
+    changeState(newState){
+        return (e) => {
+            e.preventDefault()
+            this.setState(newState)
+        }
+    }
+
     render() {
         let {formType,errors} = this.props;
-        // debugger
         return (
             <div className='session-form'>
                 <h3>{formType} Business</h3>
@@ -116,8 +156,8 @@ class BusinessForm extends React.Component {
                     <br/>
                     <label>Thumbnail Photo{' '}
                         <input type="file" onChange={this.handleFile} />
-                        {this.state.photo ? <button onClick={()=>this.setState({photo: null, photoUrl: this.state.oldPhoto||this.state.photoUrl})} >remove</button> : null}
-                        {(formType === 'Edit' && this.state.photoUrl) ? <button onClick={this.deletePhoto} >delete photo</button> : null}
+                        {this.state.photo ? <button onClick={this.changeState({photo: null, photoUrl: this.state.oldPhoto||''})} >remove</button> : null}
+                        {(formType === 'Edit' && this.state.photoUrl) ? <button onClick={this.deleteThumbnail} >delete photo</button> : null}
                     </label>
                     <br/>
                     {this.state.photoUrl ? <img src={this.state.photoUrl} height='128' width='128' /> : null}
@@ -125,12 +165,12 @@ class BusinessForm extends React.Component {
                     {formType === 'Edit' ? 
                         <label>Add to Gallery{' '}
                             <input type="file" multiple onChange={this.handleGallery} />
-                            {this.state.photos.length ? <button onClick={()=>this.setState({photos: [], photoUrls: this.state.previousPhotos||this.state.photoUrls})} >remove</button> : null}
-                            {/* {this.state.photoUrls.length ? <button onClick={this.deletePhoto} >delete photo</button> : null} */}
+                            {this.state.photos.length ? <button onClick={this.changeState({photos: [], photoUrls: this.state.previousPhotos||this.state.photoUrls})} >remove</button> : null}
+                            {this.state.photoUrls.length ? <button onClick={this.deleteGallery} >delete all gallery photos</button> : null}
                         </label> 
                     : null}
                     <br/>
-                    {this.state.photoUrls.map((url,i)=> <img key={i} src={url} height='128' width='128' alt="no image :(" />)}
+                    {this.state.photoUrls.map((url,i)=> <input type="image" onClick={this.deletePhoto(i)} key={i} src={url} height='128' width='128' alt="no image :(" />)}
                     <br/>
                     <label>Phone number{' '}
                         <input type="text" value={this.state.phone} onChange={this.handleInput('phone')}/>

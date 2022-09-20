@@ -26,7 +26,17 @@ class Api::BusinessesController < ApplicationController
 
   def update
     @business = Business.find(params[:id])
-    if @business.update(business_params)
+    if (business_params[:photo]=="null")
+      @business.photo.purge
+      render :show
+    elsif (business_params[:photos]==["null"])
+      @business.photos.purge
+      render :show
+    elsif (Integer(business_params[:photos][0])rescue false)
+      @index = business_params[:photos][0].to_i
+      @business.photos[@index].purge
+      render :show
+    elsif @business.update(business_params)
       render :show
     else
       render json: @business.errors.full_messages, status: 422
