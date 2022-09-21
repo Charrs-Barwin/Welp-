@@ -16,6 +16,17 @@ ActiveRecord::Base.connection.tables.each do |t|
     ActiveRecord::Base.connection.reset_pk_sequence!(t)
 end
 
+require 'open-uri'
+
+b1 = open('https://welp--seeds.s3.amazonaws.com/b1.png')
+b2 = open('https://welp--seeds.s3.amazonaws.com/b2.jpg')
+b3 = open('https://welp--seeds.s3.amazonaws.com/b3.jpg')
+
+# attach to user
+# bigburger.photo.attach(io: b1, filename: 'b1.png')
+# midburger.photo.attach(io: b2, filename: 'b2.jpg')
+# littleburger.photo.attach(io: b3, filename: 'b3.jpg')
+
 # USERS
 mike1 = User.create!(
     name: "mike1", 
@@ -50,6 +61,7 @@ bigburger = Business.create!(
     rating: 1,
     owner_id: 1
 )
+bigburger.photo.attach(io: b1, filename: 'b1.png')
 
 littleburger = Business.create!(
     name: "Little Burger",
@@ -59,6 +71,7 @@ littleburger = Business.create!(
     rating: 2,
     owner_id: 2
 )
+littleburger.photo.attach(io: b3, filename: 'b3.jpg')
 
 midburger = Business.create!(
     name: "Mid Burger",
@@ -68,6 +81,7 @@ midburger = Business.create!(
     rating: 4,
     owner_id: 3
 )
+midburger.photo.attach(io: b2, filename: 'b2.jpg')
 
 badburger = Business.create!(
     name: "BAD Burger",
@@ -76,6 +90,10 @@ badburger = Business.create!(
     website: "badburger.com",
     owner_id: 4
 )
+
+# bigburger.photo.attach(io: b1, filename: 'b1.png')
+# midburger.photo.attach(io: b2, filename: 'b2.jpg')
+# littleburger.photo.attach(io: b3, filename: 'b3.jpg')
 
 #REVIEWS
 r1 = Review.create!(
