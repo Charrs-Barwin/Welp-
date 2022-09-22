@@ -36,7 +36,7 @@ class Homepage extends React.Component {
             <div key={bsn.id}>
               {bsn.photoUrl ? 
                 <Link to={`/businesses/${bsn.id}`} > 
-                  <input type="image" src={bsn.photoUrl} height='128' width='128' /> 
+                  <img src={bsn.photoUrl} height='128' width='128' />
                 </Link> 
                 : null}
               <Link to={`/businesses/${bsn.id}`} >{bsn.name}</Link>
