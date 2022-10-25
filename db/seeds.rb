@@ -105,12 +105,12 @@ r1 = Review.create!(
 r2 = Review.create!(
     user_id: 2,
     business_id: 3,
-    rating: 4,
+    rating: 3,
     body: "just right"
 )
 r3 = Review.create!(
     user_id: 3,
     business_id: 1,
-    rating: 1,
+    rating: 4,
     body: "burger is too big"
 )
