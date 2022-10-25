@@ -26,21 +26,13 @@ class BusinessShow extends React.Component {
     componentDidMount() {
         this.props.getBusiness(this.props.match.params.id)
         .then(response => {
-            // if (this.props.currentUser) {
-            //     let _userReview = response.bsn.reviews.filter(review => review.user_id === this.props.currentUser.id)[0]
-            //     if (_userReview) {
-            //         this.setState({userReview: _userReview, reviewRating: _userReview.rating, reviewBody: _userReview.body})                        
-            //     }
-            // }
             this.props.getReviews(response.bsn.id)
-            .then(r2 => {
-                if (this.props.currentUser) {
-                    let _userReview = Object.values(r2.reviews).filter(review => review.user_id === this.props.currentUser.id)[0]
-                    if (_userReview) {
-                        this.setState({userReview: _userReview, reviewRating: _userReview.rating, reviewBody: _userReview.body})
-                    }
+            if (this.props.currentUser) {
+                let _userReview = response.bsn.reviews.filter(review => review.user_id === this.props.currentUser.id)[0]
+                if (_userReview) {
+                    this.setState({userReview: _userReview, reviewRating: _userReview.rating, reviewBody: _userReview.body})                        
                 }
-            })
+            }
         })
     }
 
@@ -91,35 +83,20 @@ class BusinessShow extends React.Component {
         }
         process(_review)
         .then((response)=>{
-            // this.setState({userReview: response.review, reviewFormShow: false})
-            const ratings = this.props.reviews.map(review=>review.rating)
-            const newAvg = ratings.length ? eval(ratings.join('+')) / ratings.length : 0
-            this.props.editBusiness(Object.assign(this.props.business,{rating: newAvg}))
-            .then(()=>{
-                this.setState({userReview: response.review, reviewFormShow: false})
-            })
+            this.props.getBusiness(this.props.match.params.id)
+            this.setState({userReview: response.review, reviewFormShow: false})
         })
     }
 
     deleteReview() {
         this.props.eraseReview(this.state.userReview)
         .then(()=>{
-            // this.setState({
-            //     reviewFormShow: false,
-            //     userReview: null,
-            //     reviewRating: null,
-            //     reviewBody: null
-            // })
-            const ratings = this.props.reviews.map(review=>review.rating)
-            const newAvg = ratings.length ? eval(ratings.join('+')) / ratings.length : 0
-            this.props.editBusiness(Object.assign(this.props.business,{rating: newAvg}))
-            .then(()=>{
-                this.setState({
-                    reviewFormShow: false,
-                    userReview: null,
-                    reviewRating: null,
-                    reviewBody: null
-                })
+            this.props.getBusiness(this.props.match.params.id)
+            this.setState({
+                reviewFormShow: false,
+                userReview: null,
+                reviewRating: null,
+                reviewBody: null
             })
         })
     }
@@ -174,7 +151,7 @@ class BusinessShow extends React.Component {
             <div>
                 <h1>{business.name}</h1>
                 <h6>rating </h6>
-                <h6>{business.rating||business.avgRating||'N/A'}</h6>
+                <h6>{business.avgRating}</h6>
                 {business.photoUrl ? <img src={business.photoUrl} height='128' width='128' alt="no image :(" /> : null}
                 {business.photoUrls ? business.photoUrls.map((url,i)=> <img key={i} src={url} height='128' width='128' alt="no image :(" />) : null}
                 <h3>show page</h3>
