@@ -1,5 +1,6 @@
 import {
     postUser,
+    fetchUser,
     deleteSession,
     postSession
 } from '../utils/session';
@@ -21,6 +22,9 @@ const receiveErrors = errors => ({
     type: RECEIVE_ERRORS,
     errors
 })
+
+export const getUser = userId => dispatch => fetchUser(userId)
+.then(user => dispatch(receiveCurrentUser(user)))
 
 export const createNewUser = formUser => dispatch => postUser(formUser)
 .then(user => dispatch(receiveCurrentUser(user)))

@@ -7,6 +7,10 @@ export const postUser = user => {
     })
 }
 
+export const fetchUser = (userId) => $.ajax({
+  url: '/api/users/'+userId
+});
+
 export const postSession = user => (
     $.ajax({
         url:'/api/session',
