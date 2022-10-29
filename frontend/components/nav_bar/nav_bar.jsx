@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logo from "../../../app/assets/images/Yelp-Logo.png"
 
 class NavBar extends React.Component {
   constructor(props){
@@ -29,32 +30,31 @@ class NavBar extends React.Component {
     let { currentUser } = this.props;
     
     const display = currentUser ? (
-      <div>
-        <p>Hello, {currentUser.name}</p>
-        {this.props.location.pathname != '/profile' ? (<div><Link to="/profile">Profile</Link><br/></div>) : null}
-        <button onClick={this.handleLogout} > Logout! </button>
-        <br/>
-        <Link to="/create"> <button>Add Business</button></Link>
+      <div className='navbar-User'>
+        <Link to={''} onClick={this.handleLogout} ><button id='logout-button' > Logout! </button></Link>
+        {this.props.location.pathname != '/profile' ? <div><Link to="/profile"><button id='profile-button' > Hello, {currentUser.name} </button></Link></div> : null}
       </div>
     ) : (
-      <div>
-        <Link to={{pathname:'/signup',state:{previous:this.props.location.pathname}}}><button>Sign Up</button></Link>
-        <br/>
-        <Link to={{pathname:'/login',state:{previous:this.props.location.pathname}}}><button>Log In</button></Link>
+      <div className='navbar-User'>
+        {this.props.location.pathname != '/login' ? <Link to={{pathname:'/login',state:{previous:this.props.location.pathname}}}><button id='login-button' >Log In</button></Link> : null}
+        {this.props.location.pathname != '/signup' ? <Link to={{pathname:'/signup',state:{previous:this.props.location.pathname}}}><button id='signup-button' >Sign Up</button> </Link> : null}
+        {/* {this.props.location.pathname != '/signup' ? <button className='signup-button' >Sign Up</button> : null} */}
       </div>
     );
     
     return (
       <header className="nav-bar">
-        <Link to='/'>
-          <h1 className="logo">Welp</h1>
+        <Link className="logo" to='/'>
+          <h1>Welp</h1>
+          <img src={logo} height='28' width='58' alt="no logo :(" />
         </Link>
-        <h6>{this.props.location.pathname}</h6>
-        {display}
-        <form>
+        <form className='search-bar'>
           <input type="text" value={this.state.searchInput} placeholder='search' onChange={this.handleInput()} />
-          <button type='submit' onClick={this.handleSearch} >search</button>
+          <button type='submit' onClick={this.handleSearch} >⌕</button>
         </form>
+        <Link to="/create"> <button className='create-button' >Add Business</button></Link>
+        {display}
+        {/* <h6>{this.props.location.pathname}</h6> */}
       </header>
     );
   }
