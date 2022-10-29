@@ -10,15 +10,15 @@ import NewBusinesContainer from './business/new_business_container';
 import EditBusinessContainer from './business/edit_business_container';
 import ShowBusinessContainer from './business/business_show_container'
 import BusinessIndexContainer from './business/business_index_container'
+import Footer from './nav_bar/footer'
 
 // Route ; regular
 // AuthRoute ; only if 'not logged in', else redirraect to '/'
 // Protected ; only if 'logged in', else redirect to '/signup'
 
 export default () => (
-    <div>
+    <div id="app" >
       <NavBarContainer/>
-      <h4></h4>
       <Switch>
         <ProtectedRoute path="/businesses/:id/edit" component={EditBusinessContainer} />
         <Route path="/businesses/:id" component={ShowBusinessContainer} />
@@ -31,5 +31,6 @@ export default () => (
         <Route path="/" component={HomepageContainer} />
         <Redirect to="/" />
       </Switch>
+      <Footer/>
     </div>
   );
