@@ -1,5 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import star0 from "../../../app/assets/images/0star.jpg"
+import star1 from "../../../app/assets/images/1star.jpg"
+import star2 from "../../../app/assets/images/2star.jpg"
+import star3 from "../../../app/assets/images/3star.jpg"
+import star4 from "../../../app/assets/images/4star.jpg"
+import star5 from "../../../app/assets/images/5star.jpg"
 
 class BusinessShow extends React.Component {
     constructor(props){
@@ -38,7 +44,7 @@ class BusinessShow extends React.Component {
 
     reviewForm() {
         return (
-            <form>
+            <form className='review-form'>
               <label>Rating:
                 <select onChange={this.updateRating} required >
                   <option hidden disabled selected={!this.state.reviewRating} value ></option>
@@ -53,6 +59,8 @@ class BusinessShow extends React.Component {
               <textarea cols="50" rows="4" placeholder='Review' onChange={this.updateReview} value={this.state.reviewBody||''} />
               <br/>
               <input type='submit' value='submit' onClick={this.submitReview}/>
+              <br/>
+              <br/>
             </form>
         )
     }
@@ -116,24 +124,26 @@ class BusinessShow extends React.Component {
 
     render(){
         if (!this.props.business) return null;
-        const {currentUser,business} = this.props;
+        const {currentUser,business,reviews} = this.props;
+        const stars = [star0,star1,star2,star3,star4,star5]
+        if (currentUser) reviews.sort((a, b) => Number(b.user_id == currentUser.id) - Number(a.user_id == currentUser.id))
 
         const input = currentUser ? (
             currentUser.id === business.owner_id ? (
                 <div>                
                 <Link to={`/businesses/${business.id}/edit`} ><button>Edit Business Information</button></Link>
                 <br/>
-                <Link to={'/'} > <button onClick={this.handleDelete}>Delete Business</button> </Link>
+                <Link to={'/'} > <button id='delete-button' onClick={this.handleDelete}>Delete Business</button> </Link>
                 </div>
             ) : !this.state.reviewFormShow ? (
                 this.state.userReview ? (
                     <div>
                     <button onClick={this.showReviewForm}>edit review</button>
-                    <br/>
+                    {/* <br/> */}
                     <button onClick={this.deleteReview}>delete review</button>
                     </div>
                 ) : (
-                    <button onClick={this.showReviewForm}>write review</button>
+                    <div><button onClick={this.showReviewForm}>write review</button></div>
                 )
             ) : (
                 <div>
@@ -142,30 +152,50 @@ class BusinessShow extends React.Component {
                 </div>
             )
         ) : !this.state.reviewFormShow ? (
-            <button onClick={this.showReviewForm}>write review</button>
+            <div><button onClick={this.showReviewForm}>write review</button></div>
         ) : (
             <p>please log in to write reviews</p>
         );  // end input
         
         return(
-            <div>
-                <h1>{business.name}</h1>
-                <h6>rating </h6>
-                <h6>{business.avgRating}</h6>
-                {business.photoUrl ? <img src={business.photoUrl} height='128' width='128' alt="no image :(" /> : null}
+            <div className='showpage'>
+                <header>
+                    {business.photoUrl ? <img src={business.photoUrl} height='192' width='192' alt="no image :(" /> : null}
+                    <div>
+                        <h1>{business.name}</h1>
+                        <div className='rating-info'>
+                            <img className='star-img' src={stars[Math.floor(business.avgRating)]} height='40' width='170' alt="No star img :(" />
+                            <h6> {business.avgRating}</h6>
+                            <h6> ({business.reviews.length} review{business.reviews.length != 1 ? 's' : ''})</h6>
+                        </div>
+                    </div>
+                </header>
+
+                <br/>
                 {business.photoUrls ? business.photoUrls.map((url,i)=> <img key={i} src={url} height='128' width='128' alt="no image :(" />) : null}
-                <h3>show page</h3>
-                <p>{business.location}</p>
-                <p>{business.phone}</p>
-                <p>{business.website}</p>
-                {input}                
+                <br/>
+
+                <h5>Location</h5>
+                <li>{business.location}</li>
+                <br/>
+                <h5>Telephone</h5>
+                <li>{business.phone}</li>
+                <br/>
+                <h5>Business website</h5>
+                <li>{business.website}</li>
+
+                <br/>
+                {input}
+                <br/>
+
                 <ul>
                 {
-                this.props.reviews.map(review => (
+                reviews.map(review => (
                     <div key={review.id}>
-                    <h3>{review.rating}</h3>
-                    <h5>{review.body}</h5>
-                    <h6>{review.author.name}</h6>
+                        <img className='star-img' src={stars[Math.floor(review.rating)]} height='24' width='100' alt="No star img :(" />
+                        <p>"{review.body}"</p>
+                        <h6>-{review.author.name}</h6>
+                        <br/>
                     </div>
                 ))
                 }

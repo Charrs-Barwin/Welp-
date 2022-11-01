@@ -1,10 +1,8 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
 # Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+#  movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+#  Character.create(name: 'Luke', movie: movies.first)
 
 Business.destroy_all
 User.destroy_all
@@ -12,15 +10,20 @@ Review.destroy_all
 # ActiveRecord::Base.connection.execute('ALTER TABLE table_name AUTO_INCREMENT = 1')
 # ActiveRecord::Base.connection.reset_pk_sequence!('users')
 # ActiveRecord::Base.connection.reset_pk_sequence!('businesses')
+# ActiveRecord::Base.connection.reset_pk_sequence!('reviews')
 ActiveRecord::Base.connection.tables.each do |t|
     ActiveRecord::Base.connection.reset_pk_sequence!(t)
 end
 
-require 'open-uri'
+require 'faker'
+# Faker::Name.name      #=> "Christophe Bartell"
+# Faker::Internet.email #=> "kirsten.greenholt@corkeryfisher.info"
 
+require 'open-uri'
 b1 = open('https://welp--seeds.s3.amazonaws.com/b1.png')
 b2 = open('https://welp--seeds.s3.amazonaws.com/b2.jpg')
 b3 = open('https://welp--seeds.s3.amazonaws.com/b3.jpg')
+# test = open('https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg')
 
 # attach to user
 # bigburger.photo.attach(io: b1, filename: 'b1.png')
@@ -35,7 +38,7 @@ mike1 = User.create!(
 )
 
 mike2 = User.create!(
-    name: "mike2", 
+    name: "mike2", #Faker::Name.name
     email: "mike2@email.com", 
     password: "123456"
 )
@@ -52,23 +55,30 @@ mike4 = User.create!(
     password: "123456"
 )
 
+demoUser = User.create!(
+    name: "demo user",
+    email: "demo@email.com",
+    password: "123456"
+)
+
 #BUSINESSES
 bigburger = Business.create!(
     name: "Big Burger",
     location: "12 street",
     phone: 5555555,
     website: "bigburger.com",
-    rating: 1,
     owner_id: 1
 )
 bigburger.photo.attach(io: b1, filename: 'b1.png')
+# bigburger.photo.attach(io: test, filename: 'https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg')
+# bigburger.photos.attach(io: b2, filename: 'b2.jpg')
+# bigburger.photos.attach(io: b3, filename: 'b3.jpg')
 
 littleburger = Business.create!(
     name: "Little Burger",
     location: "2 street",
     phone: 5555556,
     website: "littleburger.com",
-    rating: 2,
     owner_id: 2
 )
 littleburger.photo.attach(io: b3, filename: 'b3.jpg')
@@ -78,7 +88,6 @@ midburger = Business.create!(
     location: "6 street",
     phone: 5555557,
     website: "midburger.com",
-    rating: 4,
     owner_id: 3
 )
 midburger.photo.attach(io: b2, filename: 'b2.jpg')

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from "../../../app/assets/images/Yelp-Logo.png"
+// import grill from "../../../app/assets/images/grill.jpg"
 
 class NavBar extends React.Component {
   constructor(props){

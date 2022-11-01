@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import grill from "../../../app/assets/images/grill.jpg"
 import star0 from "../../../app/assets/images/0star.jpg"
 import star1 from "../../../app/assets/images/1star.jpg"
 import star2 from "../../../app/assets/images/2star.jpg"
@@ -38,25 +37,29 @@ class Homepage extends React.Component {
     const stars = [star0,star1,star2,star3,star4,star5]
     return (
       <div className='homepage'>
-        {/* <img className='splash-img' src={grill} alt="No img :(" /> */}
         <div className='homepage-index'>
           <h2 className='header-text' >Recently trending</h2>
           <ul className='homepage-businessItems'>
             {
               results.sort((a,b)=> b.avgRating - a.avgRating)
               .map(bsn => (
-                <div key={bsn.id}>
-                  {bsn.photoUrl ? 
-                    <Link to={`/businesses/${bsn.id}`} > 
+                <Link className='indexItem-link' to={`/businesses/${bsn.id}`} >
+                  <div key={bsn.id}>
+                    {bsn.photoUrl ?  
                       <img src={bsn.photoUrl} height='128' width='128' />
-                      <br/>
-                    </Link> 
-                    : null}
-                  <Link to={`/businesses/${bsn.id}`} >{bsn.name}</Link>
-                  <img className='star-img' src={stars[Math.floor(bsn.avgRating)]} height='22' width='90' alt="No star img :(" />
-                  <h6> {bsn.avgRating}</h6>
-                  <h6> ({bsn.reviews.length} review{bsn.reviews.length != 1 ? 's' : ''})</h6>
-                </div>
+                      : null}
+                    <br/>
+                    <div className='businessItem-bottom' >
+                      <h4>{bsn.name}</h4>
+                      <div className='rating-info'>
+                        <img className='star-img' src={stars[Math.floor(bsn.avgRating)]} height='28' width='115' alt="No star img :(" />
+                        <h6> { bsn.avgRating }</h6>
+                        <h6> ({bsn.reviews.length} review{bsn.reviews.length != 1 ? 's' : ''}) </h6>
+                      </div>
+                      {bsn.reviews.length ? <p>"{bsn.reviews.sort((a,b)=> b.rating - a.rating)[0].body}"</p> : null}
+                    </div>
+                  </div>
+                </Link>
               ))
             }
           </ul>

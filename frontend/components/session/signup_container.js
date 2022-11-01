@@ -4,8 +4,8 @@ import SessionForm from './SessionForm';
 
 const mapSTP = (state) => ({
     errors: Object.values(state.errors),
-    formType: "signup",
-    otherForm: "login"
+    formType: "Signup",
+    otherForm: "Login"
 })
 
 const mapDTP = dispatch => ({

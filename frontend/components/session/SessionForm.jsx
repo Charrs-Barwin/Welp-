@@ -10,6 +10,7 @@ class SessionForm extends React.Component {
             password:''
         }
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.handleDemo = this.handleDemo.bind(this)
     }
 
     handleInput(type) {
@@ -27,41 +28,73 @@ class SessionForm extends React.Component {
         })
     }
 
-    emailPrompt(formType) {
-        return formType==='signup' ? (
-            <div>
-                <label>email{' '}
-                    <input type="email" value={this.state.email} onChange={this.handleInput('email')}/>
-                </label>
-                <br/>
-            </div>
-        ) : (
-            <div></div>
-        );
+    handleDemo() {
+        const demoLogin = {
+            name: "demo user",
+            email: "demo@email.com",
+            password: "123456"
+        }
+        this.props.processForm(demoLogin)
+        .then( () => {
+            if (this.props.location.state) {this.props.history.push(this.props.location.state.previous)}
+            else {this.props.history.goBack()}
+        })
     }
 
     render() {
         let {currentUser,formType,otherForm,errors} = this.props;
         if (currentUser){Redirect}
+
+        const email = formType==='Signup' ? 
+            <div>
+                <input type="email" placeholder="Email" value={this.state.email} onChange={this.handleInput('email')}/>
+                <br/>
+                <br/>
+            </div>
+        : null
+
+        const otherformLink = <Link to={{pathname:("/"+otherForm),state:{previous: this.props.location.state ? this.props.location.state.previous : '/'}}} >{otherForm}</Link>
+
         return (
             <div className='session-form'>
-                <h2>{formType}</h2>
-                <Link to={{pathname:("/"+otherForm),state:{previous: this.props.location.state.previous}}} >{otherForm}</Link>
+
+                
+                <h3>{formType==='Login' ? 'Log in to Welp' : 'Sign Up for Welp'}</h3>
+                {
+                formType==='Login' ? 
+                    <div>
+                        <h4>New to Yelp? {otherformLink}</h4>
+                        <br/>
+                        <br/>
+                        <button onClick={this.handleDemo}> Log in as demo user </button>
+                        <br/>
+                        <br/>
+                        <h4>-- OR --</h4>
+                    </div>
+                    : <div>
+                        <h4>Connect with great local businesses</h4>
+                        <br/>
+                    </div>
+                }
+
                 <form onSubmit={this.handleSubmit}>
                     <br/>
-                    <label>Username{' '}
-                        <input type="text" value={this.state.name} onChange={this.handleInput('name')}/>
-                    </label>
+                    <input type="text" placeholder="Username" value={this.state.name} onChange={this.handleInput('name')}/>
                     <br/>
-                    {this.emailPrompt(formType)}
-                    <label>password{' '}
-                        <input type="password" value={this.state.password} onChange={this.handleInput('password')}/>
-                    </label>
-
-                    {errors.forEach(err => <p>{err}<br/></p>)}
+                    <br/>
+                    {email}
+                    <input type="password" placeholder="Password" value={this.state.password} onChange={this.handleInput('password')}/>
+                    <br/>
                     <br/>
                     <button type="submit">{formType}</button>
                 </form>
+                <br/>
+                {
+                formType==='Login' ? 
+                    <h5>New to Welp? {otherformLink}</h5>
+                    : <h5>Already on Welp? {otherformLink}</h5>
+                }
+
             </div>
         )
     }

@@ -143,7 +143,7 @@ class BusinessForm extends React.Component {
     render() {
         let {formType,errors} = this.props;
         return (
-            <div className='session-form'>
+            <div className='business-form'>
                 <h3>{formType} Business</h3>
                 <form onSubmit={this.handleSubmit}>
                     <label>Business name{' '}
@@ -170,7 +170,9 @@ class BusinessForm extends React.Component {
                         </label> 
                     : null}
                     <br/>
-                    {this.state.photoUrls.map((url,i)=> <input type="image" onClick={this.deletePhoto(i)} key={i} src={url} height='128' width='128' alt="no image :(" />)}
+                    <div className="gallery">
+                        {this.state.photoUrls.map((url,i)=> <input type="image" onClick={this.deletePhoto(i)} key={i} src={url} height='128' width='128' alt="no image :(" />)}
+                    </div>
                     <br/>
                     <label>Phone number{' '}
                         <input type="text" value={this.state.phone} onChange={this.handleInput('phone')}/>
@@ -183,8 +185,10 @@ class BusinessForm extends React.Component {
 
                     {errors.forEach(err => <p>{err}<br/></p>)}
                     <br/>
-                    <button type="submit">{formType}</button>
-                    <Link to={this.props.formType === 'Edit' ? `/businesses/${this.props.business.id}` : '/'} >
+                    <button type="submit" className="red-button">{formType}</button>
+                    <br/>
+                    <br/>
+                    <Link to={(this.props.formType === 'Edit' && this.props.business) ? `/businesses/${this.props.business.id}` : '/'} >
                         <button>Cancel</button>
                     </Link>
                 </form>
