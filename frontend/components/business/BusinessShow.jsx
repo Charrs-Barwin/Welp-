@@ -1,11 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import star0 from "../../../app/assets/images/0star.jpg"
-import star1 from "../../../app/assets/images/1star.jpg"
-import star2 from "../../../app/assets/images/2star.jpg"
-import star3 from "../../../app/assets/images/3star.jpg"
-import star4 from "../../../app/assets/images/4star.jpg"
-import star5 from "../../../app/assets/images/5star.jpg"
 
 class BusinessShow extends React.Component {
     constructor(props){
@@ -125,7 +119,7 @@ class BusinessShow extends React.Component {
     render(){
         if (!this.props.business) return null;
         const {currentUser,business,reviews} = this.props;
-        const stars = [star0,star1,star2,star3,star4,star5]
+        const stars = [window.star0,window.star1,window.star2,window.star3,window.star4,window.star5]
         if (currentUser) reviews.sort((a, b) => Number(b.user_id == currentUser.id) - Number(a.user_id == currentUser.id))
 
         const input = currentUser ? (

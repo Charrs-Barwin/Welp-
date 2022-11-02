@@ -1,11 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import star0 from "../../../app/assets/images/0star.jpg"
-import star1 from "../../../app/assets/images/1star.jpg"
-import star2 from "../../../app/assets/images/2star.jpg"
-import star3 from "../../../app/assets/images/3star.jpg"
-import star4 from "../../../app/assets/images/4star.jpg"
-import star5 from "../../../app/assets/images/5star.jpg"
 
 class Homepage extends React.Component {
   constructor(props){
@@ -34,7 +28,7 @@ class Homepage extends React.Component {
       return bsn.name.match(searchExpression) || bsnParams.some(param=> param == this.state.searchInput)
     })
     if (!results.length) return <h6>No search results</h6>
-    const stars = [star0,star1,star2,star3,star4,star5]
+    const stars = [window.star0,window.star1,window.star2,window.star3,window.star4,window.star5]
     return (
       <div className='homepage'>
         <div className='homepage-index'>

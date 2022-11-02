@@ -1,11 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import star0 from "../../../app/assets/images/0star.jpg"
-import star1 from "../../../app/assets/images/1star.jpg"
-import star2 from "../../../app/assets/images/2star.jpg"
-import star3 from "../../../app/assets/images/3star.jpg"
-import star4 from "../../../app/assets/images/4star.jpg"
-import star5 from "../../../app/assets/images/5star.jpg"
 
 class UserShow extends React.Component {
 
@@ -18,7 +12,7 @@ class UserShow extends React.Component {
         if (!this.props.currentUser) return null;
         if (!this.props.businesses) return null;
         const {currentUser,businesses} = this.props;
-        const stars = [star0,star1,star2,star3,star4,star5]
+        const stars = [window.star0,window.star1,window.star2,window.star3,window.star4,window.star5]
         // debugger
         return(
             <div className='profile-page'>

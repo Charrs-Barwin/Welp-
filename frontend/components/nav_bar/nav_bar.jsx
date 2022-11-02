@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from "../../../app/assets/images/Yelp-Logo.png"
-// import grill from "../../../app/assets/images/grill.jpg"
 
 class NavBar extends React.Component {
   constructor(props){
@@ -47,7 +45,7 @@ class NavBar extends React.Component {
       <header className="nav-bar">
         <Link className="logo" to='/'>
           <h1>Welp</h1>
-          <img src={logo} height='28' width='58' alt="no logo :(" />
+          <img src={window.logo} height='28' width='58' alt="no logo :(" />
         </Link>
         <form className='search-bar'>
           <input type="text" value={this.state.searchInput} placeholder='search' onChange={this.handleInput()} />
